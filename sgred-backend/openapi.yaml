@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: API SGRED
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/api/v1
+paths:
+  /auth/registro:
+    post:
+      summary: Registrar usuario
+      responses:
+        "201": { description: Cuenta creada }
+  /auth/login:
+    post:
+      summary: Iniciar sesion
+      responses:
+        "200": { description: Sesion creada }
+  /unidades:
+    get:
+      summary: Consultar unidades
+      responses:
+        "200": { description: Listado }
+  /escenarios:
+    get:
+      summary: Filtrar escenarios
+      responses:
+        "200": { description: Listado }
+  /escenarios/{id}/disponibilidad:
+    get:
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+        - { name: fecha, in: query, required: true, schema: { type: string, format: date } }
+      responses:
+        "200": { description: Franjas disponibles }
+  /reservas:
+    post:
+      summary: Solicitar reserva
+      responses:
+        "201": { description: Solicitud creada }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
